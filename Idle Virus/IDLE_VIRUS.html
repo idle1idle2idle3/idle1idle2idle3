@@ -1,0 +1,195 @@
+﻿<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Idle Virus v1.0</title>
+<meta name="description" content="Start with nothing and raise you viruses to world domination."/>
+<script src="IDLE_VIRUS.js">
+
+</script>
+<script src="restore.js">
+
+</script>
+<script src="buyer.js">
+
+</script>
+<script src="controldisplay.js">
+
+</script>
+<script src="ticker.js">
+
+</script>
+<style type="text/css">
+.auto-style1 {
+	font-size: x-large;
+}
+.auto-style2 {
+	font-size: medium;
+}
+.auto-style3 {
+	font-size: xx-large;
+	text-align: center;
+}
+.auto-style4 {
+	font-size: larger;
+}
+.auto-style5 {
+	color: #FFFFFF;
+}
+.auto-style6 {
+	font-size: x-large;
+	color: #FFFFFF;
+}
+.auto-style7 {
+	font-size: xx-large;
+	color: #FFFFFF;
+}
+.auto-style8 {
+	font-size: medium;
+	color: #FFFFFF;
+}
+</style>
+</head>
+
+<body onload="restore()" onunload="store()" style="background-image: url('bg.png'); background-repeat: no-repeat; background-size:cover">
+
+
+<button id="Baustein" style="width: 227px; height: 50px;display: none;cursor: pointer;"onclick="showmodule()">button</button>
+<button id="Substanzen" style="width: 227px; height: 50px; display: none;cursor: pointer;"onclick="showmaterial()">button</button>
+<button id="RNA" style="width: 227px; height: 50px;display: none;cursor: pointer;" onclick="showRNA()">button</button>
+<button id="DNA" style="width: 227px; height: 50px;display: none;cursor: pointer;" onclick="showDNA()">button</button>
+<button id="Credits" style="width: 227px; height: 50px;display: none;cursor: pointer;" onclick="credit">button</button>
+<button id="Changer" style="width: 227px; height: 50px;display: none;cursor: pointer;" onclick="changeloger()">Changelog</button>
+<div id="Changelog" style="width: 500px;height: 500px;display: none;color:orange; position: absolute; left: 9px; top: 93px;" >
+12th March 2021:<br/>
+-improved ticker<br/>
+-decreased chance for hostcells<br/>
+-delete button added<br/>
+-errors fixed<br/>
+<br/>
+23rd January 2021:<br />
+-updated counter<br />
+-visitor counter
+</div>
+<span id="hostcelloutput" style="display: none; color: #FFFFFF;"></span>
+	<div id="RNAgathering" style="display: none">
+		<button id="coldv"name="Abutton6" style="width: 225px; height: 55px;cursor: pointer;" onclick="showscoldvinf('coldvinf')">button</button><br />
+		<button id="zcoldv"name="Abutton7" style="width: 225px; height: 55px;cursor: pointer;" onclick="showscoldvinf('zcoldvinf')">button</button>
+		<div id="coldvinf" style="display: none">
+			<span class="auto-style6">Normal-Cold-Virus</span><br class="auto-style5" />
+			<span class="auto-style2"><span class="auto-style5">This Virus is the trigger of a normal 
+			cold.</span><br class="auto-style5" />
+			<br class="auto-style5" />
+			<span class="auto-style5">One unit costs 10 Virus Modules, 10 DNA and 2 Genetic Material.</span></span><br />
+				<input id="coldbuynumb"name="Text2" style="height: 50px;cursor: pointer;" type="number" placeholder="1" onchange="updbuycold()" onkeyup="updbuycold()"/>
+				<button id="coldbuy"name="Abutton8" style="width: 170px; height: 50px;cursor: pointer;"onclick="upbuycoldbuy()">1 Unit</button>
+				<button id="coldbuymax"name="Abutton9" style="width: 170px; height: 50px;cursor: pointer;" onclick="buymaxcoldunit()">button</button>
+		</div>
+		<div id="zcoldvinf"style="display: none; height: 219px;">
+			<span class="auto-style7">Zilla-Cold-Virus</span><br class="auto-style5" />
+			<span class="auto-style2"><span class="auto-style5">This Virus gains slowly Cold-Viruses.</span><br class="auto-style5" />
+			<br class="auto-style5" />
+			<span class="auto-style5">One unit costs 150 Virus Modules, 1000 DNA, 100 Cold Viruses 
+			and 100 Genetic Material.</span></span><br />
+			<input id="zcoldbuynumb"name="Text3" type="number"placeholder="1"style="height: 50px;cursor: pointer;"onchange="upbuyzcold()" onkeyup="upbuyzcold()"/>
+		    <button id="zcoldbuy"name="Abutton10" style="width: 170px; height: 50px;cursor: pointer;"onclick="upbuyzcoldbuy()">1 Unit</button>
+		    <button id="zcoldbuymax"name="Abutton11" style="width: 170px; height: 50px;cursor: pointer;" onclick="buymaxzcoldunit()">button</button>
+         </div>
+    </div>
+
+<div id="RNAdisplay" style="display: none">
+		<button id="sRNAv" name="Abutton1" style="width: 225px; height: 55px;cursor: pointer;" onclick="showsRNAinf('sRNAvinf')">
+		button</button><br />
+		<button id="aRNAv" name="Abutton2" style="width: 225px; height: 55px;cursor: pointer;" onclick="showsRNAinf('aRNAvinf')">
+		button</button><br />
+    		<div id="sRNAvinf" class="auto-style1" style="padding: 10px; display: none ">
+				<span class="auto-style5">Simple-RNA-Virus</span><span class="auto-style2"><br class="auto-style5" />
+				<span class="auto-style5">A Virus, which copys RNA into DNA.</span><br class="auto-style5" />
+			<br class="auto-style5" />
+				<span class="auto-style5">One unit costs 5 Virus Modules and 1 Genetic Material.</span><br />
+				<input id="sbuynumb" name="Text1" style="height: 50px;cursor: pointer;" type="number" placeholder="1" onchange="updbuys()" onkeyup="updbuys()"/>
+			</span>
+
+				<button id="sbuy"name="Abutton4" style="width: 170px; height: 50px;cursor: pointer;"onclick="upbuysbuy()">1 Unit</button>
+				<button id="sbuymax"name="Abutton5" style="height: 50px; width: 170px;cursor: pointer;" onclick="buymaxsunit()">
+				button</button>
+	
+		</div>
+		
+		
+		<div id="aRNAvinf" style="display: none"><span class="auto-style1">
+			<span class="auto-style5">Advanced-RNA-Virus</span><br class="auto-style5" />
+		</span><span class="auto-style5">This Virus produces Normal-RNA-Viruses and don't produces RNA.</span><br class="auto-style5" />
+		<br class="auto-style5" /><span class="auto-style5">One unit costs 150 DNA, 250 Virus Modules, 20 Genetic Materials 
+			and 100 RNA-Viruses.</span><br />
+				<input id="abuynumb" name="Text4" type="number"placeholder="1" style="height: 50px;cursor: pointer;"placeholder="1"onchange="updbuya()" onkeyup="updbuya()"/>
+				<button id="abuy"name="Abutton13"style="width: 170px; height: 50px;cursor: pointer;">1 Unit</button>
+				<button id="abuymax"name="Abutton14"style="width: 170px; height: 50px;cursor: pointer;"onclick="buymaxaunit()">button</button>
+		</div>
+
+
+
+</div>
+
+
+<div id="Module" class="auto-style1" style="height: 149px; display: none">
+	<span class="auto-style5">Virus-Module-Generator</span><br class="auto-style5" />
+	<span class="auto-style2">
+	<span class="auto-style5">This Generator produces Virus Modules an can be 
+	upgraded with Hostcells.</span><br class="auto-style5" />
+	<br class="auto-style5" />
+	<span class="auto-style5">One upgrade cost </span> 
+	<span id="hostcellupgrd" class="auto-style5">&nbsp; </span></span><br />
+	<div id="vmbar" style="width: 100px; height: 55px; background-color: blue; display: block;">
+		<button id="moduleupgrd"name="Abutton12" style="width: 100px; height: 55px;cursor: pointer;"onclick="moduleupgrd()">button</button>
+	</div>
+	</div>
+
+<div id="Material" style="display: none">
+	<span class="auto-style1"><span class="auto-style5">Genetic-Material-Generator</span><br class="auto-style5" />
+	</span>
+	<span class="auto-style8">This Generator produces Genetic Materials.</span><span id="Material"class="auto-style1"style="display: none"></span><br class="auto-style5" />
+	<br class="auto-style5" />
+	<span class="auto-style5">One upgrade cost </span> 
+	<span id="hostcellupgrde" class="auto-style5">&nbsp; </span><br />
+	<div id="gmbar" style="height: 55px; width: 100px; background-color: blue; display: block;">
+		<button id="materialupgrd"style="width: 100px; height: 55px;cursor: pointer;"onclick="materialupgrd()">button</button>
+	</div>
+</div>
+
+<div style="position: absolute; right: 2px; bottom: 2px">
+	this game is programmed by Elias Krauße
+</div>
+
+<div id="starter"style="height: 704px; display: " class="auto-style3">
+	<br />
+	<br />
+	<div id="beware" class="auto-style8" style="width: 300px; top: 32mm; position: absolute; right: 76mm; cursor: progress; text-decoration: blink; font-family: Chiller; font-size: large;">
+		Beware of the CORONAVIRUS</div>
+	<span class="auto-style4"><br />
+	<span class="auto-style5">IDLE VIRUS v1.0</span><br />
+	<br />
+	</span>
+		<button id="starte"name="Abutton15" style="top: 500px; right: 500px; width: 365px; height: 155px; color: #FFFFFF; clip: rect(auto, auto, 500px, auto); font-size: xx-large; background-color: #000000; cursor: pointer;"onclick="starto()">
+		PLAY</button>
+</div>
+
+<div id="instructorfield" style="position: absolute; display: none; bottom: 142px; left: 11px; width: calc(100% - 44px); border: 1px solid #888; padding: 5px; margin:11px;">
+	<div id="instructor" style="color: #FFFFFF">
+				</div><button id="closer"name="Abutton16" style="position: absolute; right: 5px; top: 5px; color: #FF0000"onclick="close()">
+		X</button>
+
+
+
+
+		
+
+</div>
+<button id="deleter" onclick="deletesave()" style="position:absolute; right: 20px; top: 5px">Delete</button>
+
+<a href="http://www.andyhoppe.com/" title="Besucherzaehler" style="position: fixed; left: 5px; bottom: 5px"><img 
+src="//c.andyhoppe.com/1609412231" style="border:none" alt="Besucherzaehler" /></a>
+
+</body>
+
+</html>
